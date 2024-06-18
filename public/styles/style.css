@@ -1,0 +1,465 @@
+*{
+    margin:0px;
+    padding:0px;
+} 
+    body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+        color:white;
+    }
+    .navbar {
+        height:75px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color:transparent;
+        padding: 15px;
+        padding-bottom: 35px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #222f3d;
+    }
+    .logo {
+        margin-top: 0%;
+        font-size: 40px;
+        font-weight: bold;
+        color: #00ff26;
+    }
+    .menu-item {
+        margin-right: 25px;
+        text-decoration: none;
+        font-size: 15px;
+        color: white;
+    }
+    .menu-item:hover {
+        font-size:20px;
+        color: greenyellow;
+    }
+    .search-bar {
+        width:250px;
+       font-size: large;
+       font-family: Arial, Helvetica, sans-serif;
+       font-weight:bold ;
+    }
+    input[name="textt"]{
+        width:150px;
+        font-size: large;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight:bold ;
+     }
+    
+    .btn{
+        width:75px;
+        font-size:17px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #dddddd;
+        border: 0.5px solid #dddddd;
+        text-align: center;
+    }
+    .tabs {
+        font-weight: bold;
+        font-size: large;
+        margin-top: 10px;;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+        color:violet;
+    }
+    .tabs:hover{
+        font-size:25px;
+        color: greenyellow;
+        transition-duration: 1.5s;
+    }
+    .tab-item {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    /* colour and styling later on */
+
+    .tab-item a{
+        padding-left: 10px;
+        padding-right: 10px;
+        text-decoration: none;
+        color: violet;
+    }
+    .tab-item > a :hover{
+        font-size:25px;
+        color: greenyellow;
+        transition-duration: 1.5s;
+    }
+
+    .landing-sec{
+        margin-top:10px;
+        height:500px;
+        background-image:url(land-sec.jpg);
+        background-size: contain;
+    }
+
+    .main-sec{
+        height: 2800px;
+        display:flex;
+        justify-content: space-evenly;
+        flex-wrap:wrap;
+    }
+    .genre{
+        margin-top: 10px;
+        font-size:20px;
+        height: 30px;
+        width:100%;
+        
+    }
+    .box{
+        height:350px;
+        width:300px;
+        background-color:rgb(176, 193, 149);
+        padding:20px 0px 15px;
+    }
+    .box-img{
+        height:250px;
+        background-size: cover;
+    }
+    .box-content{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .foot-pane1{
+        background-color:#37475a;
+        color:white;
+        height:50px;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        margin-top: 1px;
+        font-size:0.85rem;
+    }
+    .foot-pane2{
+        background-color:#222f3d;
+        color:white;
+        height:300px;
+        display:flex;
+        justify-content: space-evenly;
+    }
+    ul{
+        margin-top:20px;
+    }
+    ul a{
+        display:block;
+        font-size: 0.85rem;
+        margin-top: 10px;
+        color:#dddddd
+    }
+    
+    .foot-pane3{
+        background-color: #222f3d;
+        color:white;
+        border-top: 0.5px solid white;
+        height:68px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo{
+        background-image: url("logo.jpg"); 
+        height:50px;
+        width:113px;
+        background-size:cover;
+        margin-left: 20px;
+    }
+    .foot-pane4{
+        height:76px;
+        background-color: #0f1111;
+        color:white;
+        font-size: 0.7rem;
+        text-align: center;
+    }
+    .pages{
+        padding-top: 25px;
+    }
+    .game-card{
+        border: 2px solid violet;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 25% ;
+        height: 100px;
+        font-size: 20px;
+        flex-direction: row;
+        margin-right: 20px;
+        box-shadow: 0 0 10px violet;
+        margin-left: 20px;
+    }
+
+    .game-card:hover{
+        height:120px;
+        width:30%;
+        border: 3px solid limegreen;
+        transition-duration: 0.75s;
+        color: limegreen;
+        font-size: 25px;
+    }
+
+    .game-card img {
+        width: 75px; /* Adjust size as needed */
+        height: 75px;
+        margin-right: 10px;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .trending-back h1{
+        margin-top: 20px;
+        font-size: 40px;
+    }
+    .card {
+        perspective: auto;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        height: 250px;
+        max-width: 250px;
+        margin: 30px;
+        background: none;
+      }
+      
+      .card-side {
+        height: 250px;
+        width: 250px;
+        border-radius: 16px;
+        transition: all 0.8s ease;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* padding: 30px; */
+        color: white;
+        border: 3px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: 500 50px "Inter", sans-serif;
+      }
+      .card-side.back {
+        transform: rotateY(-180deg);
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+      }
+      
+      .card-side.front {
+          background-image: linear-gradient(43deg, #4158D0 0%,#C850C0 46%, #FFCC70 100%);
+      }
+      
+      .card:hover .card-side.front {
+        transform: rotateY(180deg);
+      }
+      
+      .card:hover .card-side.back {
+        transform: rotateY(0deg);
+      }
+
+      #myBtn {
+        display: none; /* Hidden by default */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 20px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        background-color: black; /* Set a background color */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 10px; /* Rounded corners */
+        font-size: 18px; /* Increase font size */
+      }
+      
+      #myBtn:hover {
+        background-color: #555; /* Add a dark-grey background on hover */
+      }
+
+      /* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+.chatbot-toggler {
+  position: fixed;
+  bottom: 30px;
+  right: 100px;
+  outline: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #724ae8;
+  transition: all 0.2s ease;
+}
+body.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+.chatbot-toggler span {
+  color: #fff;
+  position: absolute;
+}
+.chatbot-toggler span:last-child,
+body.show-chatbot .chatbot-toggler span:first-child  {
+  opacity: 0;
+}
+body.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+.chatbot {
+  position: fixed;
+  right: 35px;
+  bottom: 90px;
+  width: 420px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: bottom right;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+  transition: all 0.1s ease;
+}
+body.show-chatbot .chatbot {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.chatbot header {
+  padding: 16px 0;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  background: #724ae8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.chatbot header span {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  display: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+header h2 {
+  font-size: 1.4rem;
+}
+.chatbot .chatbox {
+  overflow-y: auto;
+  height: 400px;
+  padding: 30px 20px 100px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+  width: 6px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 25px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+.chatbox .chat {
+  display: flex;
+  list-style: none;
+}
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+.chatbox .incoming span {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  line-height: 32px;
+  align-self: flex-end;
+  background: #724ae8;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+.chatbox .chat p {
+  white-space: pre-wrap;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  color: #fff;
+  font-size: 0.95rem;
+  background: #724ae8;
+}
+.chatbox .incoming p {
+  border-radius: 10px 10px 10px 0;
+}
+.chatbox .chat p.error {
+  color: #721c24;
+  background: #f8d7da;
+}
+.chatbox .incoming p {
+  color: #000;
+  background: #f2f2f2;
+}
+.chatbot .chat-input {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 3px 20px;
+  border-top: 1px solid #ddd;
+}
+.chat-input textarea {
+  height: 55px;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  max-height: 180px;
+  padding: 15px 15px 15px 0;
+  font-size: 0.95rem;
+}
+.chat-input span {
+  align-self: flex-end;
+  color: #724ae8;
+  cursor: pointer;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  font-size: 1.35rem;
+}
+.chat-input textarea:valid ~ span {
+  visibility: visible;
+}
+
+@media (max-width: 490px) {
+  .chatbot-toggler {
+    right: 20px;
+    bottom: 20px;
+  }
+  .chatbot {
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot .chatbox {
+    height: 90%;
+    padding: 25px 15px 100px;
+  }
+  .chatbot .chat-input {
+    padding: 5px 15px;
+  }
+  .chatbot header span {
+    display: block;
+  }
+}

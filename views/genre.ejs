@@ -1,0 +1,63 @@
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\header.ejs") %>
+    <link rel="stylesheet" href="\styles\genre1style.css">
+
+    <div class="catagory-page">
+        <div class="title">
+        <h3 id="heading">TRENDING AND NEW </h3>
+        <a href="#" id="see-more-msg"></a>
+    </div>
+        <div class="trending">
+        <div class="game">
+            <div class="game-content">
+            <h2>GAME NAME</h2>
+            <div class="game-img" style="background-image:url('');"></div>
+            <p>PLAY GAME</p>
+        </div>
+        </div>
+        <div class="game">
+            <div class="game-content">
+            <h2>GAME NAME</h2>
+            <div class="game-img" style="background-image:url('');"></div>
+            <p>PLAY GAME</p>
+        </div>
+        </div>
+        <div class="game">
+            <div class="game-content">
+            <h2>GAME NAME</h2>
+            <div class="game-img" style="background-image:url('');"></div>
+            <p>PLAY GAME</p>
+        </div>
+        </div>
+        <div class="game">
+            <div class="game-content">
+            <h2>GAME NAME</h2>
+            <div class="game-img" style="background-image:url('');"></div>
+            <p>PLAY GAME</p>
+        </div>
+        </div>
+        <div class="game">
+            <div class="game-content">
+            <h2>GAME NAME</h2>
+            <div class="game-img" style="background-image:url('');"></div>
+            <p>PLAY GAME</p>
+        </div>
+        </div>
+    </div>
+    <div class="others">
+        <h3 id="other">See more in driving</h3>
+        <div class="driving">
+            <% for(let row_num = 0; row_num<9; row_num++){ %>
+            <div class="game">
+                <div class="game-content">
+                    <h2><%= name[row_num] %></h2>
+                    <% let image_url = image[row_num] %>
+                    <div class="game-img" style="background-image:url(<%=image_url%>);"></div>
+                    <p>PLAY GAME</p>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    </div>
+
+    <%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\footer.ejs") %>
