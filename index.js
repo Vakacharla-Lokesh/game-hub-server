@@ -91,4 +91,105 @@ app.get('/puzzle', (req, res)=>{
   res.render("genre.ejs", game);
 });
 
+app.get('/about', (req, res)=>{
+  res.render("about_index.ejs");
+});
+
+app.get('/signup-get', (req, res) =>{
+  res.render("signup.ejs");
+});
+
+app.get('/login-get', (req, res) =>{
+  res.render("login.ejs");
+});
+
+// SIGNUP ROUTE
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+
+app.post('/signup', (req, res) => {
+  const { username, email, password, confirm_password } = req.body;
+  if (password!== confirm_password) {
+    return res.status(400).send({ error: 'Passwords do not match' });
+  }
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const user = new User({ username, email, password: hashedPassword });
+  user.save((err, user) => {
+    if (err) {
+      return res.status(500).send({ error: 'Failed to create user' });
+    }
+    res.send({ message: 'User created successfully' });
+  });
+});
+
+// LOGIN ROUTE
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ username }, (err, user) => {
+    if (err ||!user) {
+      return res.status(401).send({ error: 'Invalid username or password' });
+    }
+    const isValid = bcrypt.compareSync(password, user.password);
+    if (!isValid) {
+      return res.status(401).send({ error: 'Invalid username or password' });
+    }
+    const sessionToken = uuid.v4();
+    const session = new Session({ user_id: user._id, session_token });
+    session.save((err, session) => {
+      if (err) {
+        return res.status(500).send({ error: 'Failed to create session' });
+      }
+      res.cookie('session_token', sessionToken, { httpOnly: true });
+      res.send({ message: 'Logged in successfully' });
+    });
+  });
+});
+// LOGOUT ROUTE
+app.get('/logout', (req, res) => {
+  const sessionToken = req.cookies.session_token;
+  Session.findOneAndRemove({ session_token }, (err, session) => {
+    if (err) {
+      return res.status(500).send({ error: 'Failed to delete session' });
+    }
+    res.clearCookie('session_token');
+    res.send({ message: 'Logged out successfully' });
+  });
+});
+
+const authenticate = (req, res, next) => {
+  const sessionToken = req.cookies.session_token;
+  Session.findOne({ session_token }, (err, session) => {
+    if (err ||!session) {
+      return res.status(401).send({ error: 'Invalid session token' });
+    }
+    req.user = session.user_id;
+    next();
+  });
+};
+
+// USING MONGODB
+mongoose.connect('mongodb://localhost:27017/game-hub', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', (err) => console.error(err));
+db.once('open', () => console.log('Connected to MongoDB'));
+
+const userSchema = new mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+  created_at: Date,
+  updated_at: Date
+});
+
+const User = mongoose.model('User', userSchema);
+
+const sessionSchema = new mongoose.Schema({
+  user_id: mongoose.Schema.Types.ObjectId,
+  session_token: String,
+  expires_at: Date,
+  created_at: Date,
+  updated_at: Date
+});
+
+const Session = mongoose.model('Session', sessionSchema);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

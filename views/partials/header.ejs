@@ -20,12 +20,12 @@
         </div>
         <div>
             <!-- Add more menu items here -->
-            <a href="#" class="menu-item">SIGN UP</a>
+            <!-- <a href="#" class="menu-item">SIGN UP</a>
             <a href="#" class="menu-item">LOGIN</a>
-            <a href="#" class="menu-item">CONTACT US</a> 
+            <a href="#" class="menu-item">CONTACT US</a>  -->
             <!-- <a href="#" class="menu-item">YOUR ACCOUNT</a> -->
             <!-- <svg xmlns="http://www.w3.org/2000/svg" class = "menu-item" width="24" height="24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" data-icon="SvgUser" aria-hidden="true"><path d="M12 3a3.5 3.5 0 11-2.475 1.025A3.493 3.493 0 0112 3zm6.2 18a9.257 9.257 0 00-1.825-5.65A5.593 5.593 0 0012 13h0a5.593 5.593 0 00-4.375 2.35A9.257 9.257 0 005.8 21h12.4z"></path></svg> -->
-            <a href="#" class="menu-item">HELP</a>
+            <!-- <a href="#" class="menu-item">HELP</a> -->
         </div>
         <!-- <div class="search-bar">
             <input type="text" placeholder="Search our Games" name="textt">
@@ -36,20 +36,20 @@
           </form>
   
           <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-outline-light me-2" style="width: fit-content;">Sign-up</button>
+            <a href="/login-get"> <button type="button" class="btn btn-outline-light me-2">Login</button> </a>
+            <a href="/signup-get"> <button type="button" class="btn btn-outline-light me-2" style="width: fit-content;">Sign-up</button> </a>
           </div>
     </div>
 
     <div class="tabs">
         <!-- Tab items --> |  
-        <span class="tab-item"><a href="genre1.html">Driving</a></span> |
-        <span class="tab-item">Shooting</span> |  
-        <span class="tab-item">Strategy & RPG</span> |  
-        <span class="tab-item">Fighting</span> |  
-        <span class="tab-item">Action & Adventure</span> |  
-        <span class="tab-item">Sports</span> |  
-        <span class="tab-item">All Categories</span>
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving-genre').offsetTop)">Driving</span> |
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('shooting-genre').offsetTop)">Shooting</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('strategy-genre').offsetTop)">Strategy & RPG</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('fighting-genre').offsetTop)">Fighting</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('action-genre').offsetTop)">Action & Adventure</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('sports-genre').offsetTop)">Sports</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving').offsetTop)">All Categories</span>
         <!-- Add more tabs here -->
     </div>
     <div id="game-thumbnails">
