@@ -9,50 +9,40 @@
         <div class="trending">
         <div class="game">
             <div class="game-content">
-            <h2>GAME NAME</h2>
-            <div class="game-img" style="background-image:url('');"></div>
-            <p>PLAY GAME</p>
+                <a target="_blank" href="https://www.y8.com/games/plants" style="text-decoration: none; color: limegreen;"><img alt="Plants" src="https://img.y8.com/cloud/v2-y8-thumbs-small-thumbnails-001/131758/small.gif" /><br>Plants<br>Play Now!</a>
         </div>
         </div>
         <div class="game">
             <div class="game-content">
-            <h2>GAME NAME</h2>
-            <div class="game-img" style="background-image:url('');"></div>
-            <p>PLAY GAME</p>
+                <a target="_blank" href="https://www.y8.com/games/mahjong_dynasty_html5" style="text-decoration: none; color: limegreen;"><img alt="Mahjong Dynasty" class="thumb playable" src="https://img.y8.com/cloud/v2-y8-thumbs-small-thumbnails-001/115436/small.gif" /><br>Mahjong Dynasty<br>Play Now!</a>
         </div>
         </div>
         <div class="game">
             <div class="game-content">
-            <h2>GAME NAME</h2>
-            <div class="game-img" style="background-image:url('');"></div>
-            <p>PLAY GAME</p>
+                <a target="_blank" href="https://www.y8.com/games/city_war_3d" style="text-decoration: none; color: limegreen;"><img alt="City War 3D" class="thumb playable" src="https://img.y8.com/cloud/v2-y8-thumbs-small-thumbnails-001/146063/small.gif" /><br>City War 3D<br>Play Now!</a>
         </div>
         </div>
         <div class="game">
             <div class="game-content">
-            <h2>GAME NAME</h2>
-            <div class="game-img" style="background-image:url('');"></div>
-            <p>PLAY GAME</p>
+                <a target="_blank" href="https://www.y8.com/games/city_war_3d" style="text-decoration: none; color: limegreen;"><img alt="City War 3D" class="thumb playable" src="https://img.y8.com/cloud/v2-y8-thumbs-small-thumbnails-001/146063/small.gif" /><br>City War 3D<br>Play Now!</a>
         </div>
         </div>
         <div class="game">
             <div class="game-content">
-            <h2>GAME NAME</h2>
-            <div class="game-img" style="background-image:url('');"></div>
-            <p>PLAY GAME</p>
+                <a target="_blank" href="https://www.y8.com/games/gumball_multiverse_mayhem" style="text-decoration: none; color: limegreen;"><img alt="Gumball: Multiverse Mayhem" class="thumb playable" src="https://img.y8.com/cloud/v2-y8-thumbs-small-thumbnails-001/164893/small.gif" /><br>Gumball: Multiverse Mayhem<br>Play Now!</a>
         </div>
         </div>
     </div>
     <div class="others">
-        <h3 id="other">See more in driving</h3>
+        <h3 id="other">See more in <%= genre_type %></h3>
         <div class="driving">
-            <% for(let row_num = 0; row_num<9; row_num++){ %>
+            <% for(let row_num = 0; row_num<10; row_num++){ %>
             <div class="game">
                 <div class="game-content">
-                    <h2><%= name[row_num] %></h2>
+                    <h2 style="position: absolute; bottom: 5px;"><%= name[row_num] %></h2>
                     <% let image_url = image[row_num] %>
-                    <div class="game-img" style="background-image:url(<%=image_url%>);"></div>
-                    <p>PLAY GAME</p>
+                    <div class="game-img" style="background-image:url(<%=image_url%>);"><img src="<%= image_url %>" alt=""></div>
+                    <!-- <p>PLAY GAME</p> -->
                 </div>
             </div>
             <% } %>

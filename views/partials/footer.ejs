@@ -46,7 +46,7 @@
         </ul>
         <ul>
             <p>Let Us Help You</p>
-            <a href="#" target="_main">FAQs</a>
+            <a href="/faqs" target="_main">FAQs</a>
             <a href="#" target="_main">Your Account</a>
             <a href="#" target="_main">Your SCORE</a>
             <a href="#" target="_main">RATE US</a>
@@ -133,7 +133,8 @@
             "What can i do for you" : "Please Give us A Follow & Like.",
             "Your followers" : "I have my family of 5000 members, i don't have follower ,have supportive Famiy ",
             "ok" : "Thank You So Much ",
-            "Bye" : "Okay! Will meet soon.."
+            "Bye" : "Okay! Will meet soon..",
+            "How do I login to my account?" : "Click on the login button on the top right of the website and use your credentials to login to your account."
         };
 
         messageElement.textContent = know[userMessage];
@@ -182,7 +183,25 @@
     sendChatBtn.addEventListener("click", handleChat);
     closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
-</script>
 
+    // NOTIFICATION FUNCTION
+    function createNotification(message) {
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+    notification.innerText = message;
+    
+    const container = document.getElementById('notification-container');
+    container.appendChild(notification);
+    
+    // Automatically remove the notification after a certain time
+    setTimeout(() => {
+        container.removeChild(notification);
+    }, 3000); // Remove after 3 seconds
+    }
+
+    // Trigger a notification
+    createNotification("this is testing");
+    // createNotification('This is a sample notification');
+</script>
 </body>
 </html>

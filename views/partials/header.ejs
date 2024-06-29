@@ -14,10 +14,14 @@
     
 </head>
     <header>
+    <div id="notification-container"></div>
     <div class="navbar">
-        <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="75" height="75" viewBox="0 0 24 24" data-icon="SvgWebhook" aria-hidden="true"><path d="M9.3 10.5C7.9 9.6 7 8.1 7 6.3c0-2.8 2.2-5 5-5s5 2.2 5 5c0 .4-.1.9-.2 1.3"></path><circle cx="12" cy="6.3" r="2"></circle><path d="M15.5 11.9c.7-.4 1.6-.7 2.5-.7 2.8 0 5 2.2 5 5s-2.2 5-5 5c-.4 0-.9-.1-1.3-.2"></path><circle cx="18" cy="16.2" r="2"></circle><path d="M15.5 11.9l-2.3-4M11 16.2h5m-6.7-5.7l-2.3 4m4 1.7c0 2.8-2.2 5-5 5s-5-2.2-5-5c0-2.3 1.6-4.3 3.7-4.8"></path><circle cx="6" cy="16.2" r="2"></circle></svg>
-        </div>
+        <!-- NOTIFICATION DIV -->
+        <a href="/">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="75" height="75" viewBox="0 0 24 24" data-icon="SvgWebhook" aria-hidden="true"><path d="M9.3 10.5C7.9 9.6 7 8.1 7 6.3c0-2.8 2.2-5 5-5s5 2.2 5 5c0 .4-.1.9-.2 1.3"></path><circle cx="12" cy="6.3" r="2"></circle><path d="M15.5 11.9c.7-.4 1.6-.7 2.5-.7 2.8 0 5 2.2 5 5s-2.2 5-5 5c-.4 0-.9-.1-1.3-.2"></path><circle cx="18" cy="16.2" r="2"></circle><path d="M15.5 11.9l-2.3-4M11 16.2h5m-6.7-5.7l-2.3 4m4 1.7c0 2.8-2.2 5-5 5s-5-2.2-5-5c0-2.3 1.6-4.3 3.7-4.8"></path><circle cx="6" cy="16.2" r="2"></circle></svg>
+            </div>
+        </a>
         <div>
             <!-- Add more menu items here -->
             <!-- <a href="#" class="menu-item">SIGN UP</a>
@@ -34,7 +38,6 @@
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 search-bar" role="search" style="padding-right: 0%;">
             <input type="search" class="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
           </form>
-  
           <div class="text-end">
             <a href="/login-get"> <button type="button" class="btn btn-outline-light me-2">Login</button> </a>
             <a href="/signup-get"> <button type="button" class="btn btn-outline-light me-2" style="width: fit-content;">Sign-up</button> </a>
@@ -43,13 +46,13 @@
 
     <div class="tabs">
         <!-- Tab items --> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving-genre').offsetTop)">Driving</span> |
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('shooting-genre').offsetTop)">Shooting</span> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('strategy-genre').offsetTop)">Strategy & RPG</span> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('fighting-genre').offsetTop)">Fighting</span> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('action-genre').offsetTop)">Action & Adventure</span> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('sports-genre').offsetTop)">Sports</span> |  
-        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving').offsetTop)">All Categories</span>
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving-genre').offsetTop - 10)">Driving</span> |
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('shooting-genre').offsetTop - 10)">Shooting</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('strategy-genre').offsetTop - 10)">Strategy & RPG</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('fighting-genre').offsetTop - 10)">Fighting</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('action-genre').offsetTop - 10)">Action & Adventure</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('sports-genre').offsetTop - 10)">Sports</span> |  
+        <span class="tab-item" onclick="window.scrollTo(0, document.getElementById('driving').offsetTop - 10)">All Categories</span>
         <!-- Add more tabs here -->
     </div>
     <div id="game-thumbnails">

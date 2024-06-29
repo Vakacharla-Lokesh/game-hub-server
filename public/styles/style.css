@@ -93,26 +93,6 @@
       color: greenyellow;
       transition-duration: 1.5s;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   .landing-sec{
       margin-top:20px;
       height:600px;
@@ -228,18 +208,6 @@ height:190px;
 width:300px;
 background-color:grey;
 }
-
-
-
-
-
-
-
-
-
-
-
-
   .box{
     
       height:200px;
@@ -264,25 +232,6 @@ background-color:grey;
       margin-left: 5px;
       margin-right: 5px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   .foot-pane1{
       background-color:#37475a;
@@ -342,13 +291,6 @@ background-color:grey;
       margin-top: 20px;
       font-size: 40px;
   }
-
-
-
-
-
-
-
   .card {
       perspective: auto;
       position: relative;
@@ -394,51 +336,6 @@ background-color:grey;
     .card:hover .card-side.back {
       transform: rotateY(0deg);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     #myBtn {
       display: none; /* Hidden by default */
@@ -646,4 +543,16 @@ visibility: visible;
 .chatbot header span {
   display: block;
 }
+}
+
+/* NOTIFICATION STYLES */
+.notification {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+  position: absolute;
+  left: 45%;
+  top: 25px;
 }
