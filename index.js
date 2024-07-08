@@ -113,9 +113,38 @@ const authenticate = (req, res, next) => {
   });
 };
 
+function loginstreak(user){
+  // Update lastLoginTime
+  user.lastLoginTime = Date.now();
+  // await user.save();
+
+  // Update loginStreak
+  const today = new Date();
+  const lastLoginDate = new Date(user.lastLoginTime);
+  const diffInDays = Math.abs(today - lastLoginDate) / (1000 * 3600 * 24);
+
+  if (diffInDays <= 1) {
+    // User has logged in consecutively
+    user.loginStreak.currentStreak += 1;
+    if (user.loginStreak.currentStreak > user.loginStreak.longestStreak) {
+      user.loginStreak.longestStreak = user.loginStreak.currentStreak;
+    }
+  } else {
+    // User has not logged in consecutively
+    user.loginStreak.currentStreak = 1;
+  }
+
+  // await user.save();
+}
+
 
 app.get('/', (req, res) => {
-  res.render("index.ejs");
+  // res.render("partials\\header.ejs", {
+  //   route: req.url,
+  // })
+  res.render("index.ejs", {
+    route: req.url,
+  });
 });
 
 app.get('/genre1', (req, res) =>{
@@ -123,7 +152,9 @@ app.get('/genre1', (req, res) =>{
 });
 
 app.get('/user', (req, res) =>{
-  res.render("index_loggedin.ejs");
+  res.render("index.ejs", {
+    route: req.url,
+  });
 });
 
 app.get('/card', (req, res)=>{
@@ -190,35 +221,15 @@ app.post('/login', async (req, res) => {
     if (!isValid) {
       return res.status(401).send({ error: 'Invalid username or password' });
     }
-
-    // Update lastLoginTime
-    user.lastLoginTime = Date.now();
-    await user.save();
-
-    // Update loginStreak
-    const today = new Date();
-    const lastLoginDate = new Date(user.lastLoginTime);
-    const diffInDays = Math.abs(today - lastLoginDate) / (1000 * 3600 * 24);
-
-    if (diffInDays <= 1) {
-      // User has logged in consecutively
-      user.loginStreak.currentStreak += 1;
-      if (user.loginStreak.currentStreak > user.loginStreak.longestStreak) {
-        user.loginStreak.longestStreak = user.loginStreak.currentStreak;
-      }
-    } else {
-      // User has not logged in consecutively
-      user.loginStreak.currentStreak = 1;
-    }
-
-    await user.save();
-    
+    loginstreak(user);
     const sessionToken = crypto.randomBytes(16).toString('hex');
     const session = new Session({ user_id: user._id, sessionToken });
     const result = await session.save();
     res.cookie('session_token', sessionToken, { httpOnly: true });
+    // res.render("index.ejs");
     // res.send({ message: 'Logged in successfully' });
-    res.render("index_loggedin.ejs");
+    // res.render("index_loggedin.ejs");
+    res.redirect('/user');
   } catch (err) {
     return res.status(500).send({ error: 'Failed to create session' });
   }
