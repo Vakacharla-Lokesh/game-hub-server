@@ -18,7 +18,11 @@ app.use(bodyParser.json());
 let sheet_data = new Map([
   ["Strategy", 0],
   ["Puzzle", 1],
+  ["Action", 2],
+
 ]);
+
+let curr_login = "false";
 
 function game_data(type, rows) {
   if (XLSX !== undefined) {
@@ -144,6 +148,7 @@ app.get('/', (req, res) => {
   // })
   res.render("index.ejs", {
     route: req.url,
+    logged_in: curr_login,
   });
 });
 
@@ -152,8 +157,10 @@ app.get('/genre1', (req, res) =>{
 });
 
 app.get('/user', (req, res) =>{
+  curr_login = "true";
   res.render("index.ejs", {
     route: req.url,
+    logged_in: curr_login,
   });
 });
 
@@ -163,7 +170,9 @@ app.get('/card', (req, res)=>{
   const game = {
     name: x,
     image: y,
-    genre_type: "Strategy"
+    genre_type: "Strategy",
+    route: req.url,
+    logged_in: curr_login,
   }
   res.render("genre.ejs", game);
 });
@@ -174,7 +183,9 @@ app.get('/puzzle', (req, res)=>{
   const game = {
     name: x,
     image: y,
-    genre_type: "Puzzle"
+    genre_type: "Puzzle",
+    route: req.url,
+    logged_in: curr_login,
   }
   res.render("genre.ejs", game);
 });
@@ -332,8 +343,19 @@ app.post('/reset-password/changed', async (req, res) => {
 });
 
 app.get('/faqs', (req, res) =>{
-  res.render('faqs.ejs');
+  res.render('faqs.ejs', {
+    route: req.url,
+    logged_in: curr_login,
+  });
 });
 
+// USER PROFILE
+app.get('/user-profile', (req, res) =>{
+  curr_login = "true";
+  res.render("profile_page.ejs", {
+    route: req.url,
+    logged_in: curr_login,
+  });
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

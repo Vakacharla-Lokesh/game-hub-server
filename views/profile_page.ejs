@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\header.ejs" , {route_path : route, login_status : logged_in}) %>
     <main>
         <section class="profile-container">
             <div class="profile-picture">
@@ -22,9 +6,6 @@
             </div>
             <div class="profile-info">
                 <h1>John Doe</h1>
-                <p>Software Engineer</p>
-                <p>john.doe@example.com</p>
-                <p>123-456-7890</p>
             </div>
             <div class="profile-bio">
                 <h2>About Me</h2>
@@ -32,20 +13,18 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2023 User Profile</p>
-    </footer>
     <style>
         /* style.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #000000;
+    color: aliceblue;
 }
 
 header {
-    background-color: #f0f0f0;
+    background-color: #000000;
     padding: 1em;
     text-align: center;
 }
@@ -63,7 +42,7 @@ nav li {
 }
 
 nav a {
-    color: #337ab7;
+    color: limegreen;
     text-decoration: none;
 }
 
@@ -107,15 +86,7 @@ main {
 }
 
 h1, h2 {
-    color: #337ab7;
-}
-
-footer {
-    background-color: #f0f0f0;
-    padding: 1em;
-    text-align: center;
-    color: #666;
+    color: limegreen;
 }
     </style>
-</body>
-</html>
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\footer.ejs") %>
