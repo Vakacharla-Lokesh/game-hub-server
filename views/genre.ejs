@@ -1,4 +1,4 @@
-<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\header.ejs", {route_path : route, login_status : logged_in}) %>
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\header.ejs", { login_status : logged_in}) %>
     <link rel="stylesheet" href="\styles\genre1style.css">
 
     <div class="catagory-page">
@@ -35,15 +35,19 @@
     </div>
     <div class="others">
         <h3 id="other">See more in <%= genre_type %></h3>
+        <% let game_url = "" %>
         <div class="driving">
-            <% for(let row_num = 0; row_num<10; row_num++){ %>
+            <% for(let row_num = 0; row_num<rows-1; row_num++){ %>
             <div class="game">
-                <div class="game-content">
-                    <h2 style="position: absolute; bottom: 5px;"><%= name[row_num] %></h2>
-                    <% let image_url = image[row_num] %>
-                    <div class="game-img" style="background-image:url(<%=image_url%>);"><img src="<%= image_url %>" alt=""></div>
-                    <!-- <p>PLAY GAME</p> -->
-                </div>
+                <% game_url = "/game-get/" + genre_type + "_" + row_num %>
+                <a href = "<%= game_url %>">
+                    <div class="game-content">
+                        <h2 style="position: absolute; bottom: 5px;"><%= name[row_num] %></h2>
+                        <% let image_url = image[row_num] %>
+                        <div class="game-img" style="background-image:url(<%=image_url%>);"><img src="<%= image_url %>" alt=""></div>
+                        <!-- <p>PLAY GAME</p> -->
+                    </div>
+                </a>
             </div>
             <% } %>
         </div>

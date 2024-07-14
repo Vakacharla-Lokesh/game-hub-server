@@ -1,0 +1,56 @@
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\header.ejs", { login_status : logged_in}) %>
+<link rel="stylesheet" href="\styles\driving-styles.css">
+    <div class="hero">
+    <div class="bodybackground">
+    <div class="welcome">
+        <h1 class = "headings">-WELCOME TO-</h1>
+        <br>
+        <br>
+        <a> <%= game_content[0] %></a>
+        <p>Imagine yourself behind the wheel of a high-speed sports car, gripping the leather steering wheel as you navigate winding roads and hairpin turns. 
+            Feel the adrenaline rush as you accelerate, brake, and drift through realistic environments.</p>
+        </div>
+    <main>
+        <section id="about">
+            <h2 class = "headings">About the Game</h2>
+            <p> <%= game_content[2] %></p>
+            <div class="ratings">
+        <span class="tab-item">image</span> |
+        <span class="tab-item">
+            <a>4.0 stars</a>
+            <a>15.23cr reviews</a>
+        </span> |  
+        <span class="tab-item">
+            <a>500cr+</a>
+            <a>downloads</a>
+        </span> |  
+        <span class="tab-item">
+            <a>icon</a>
+            <a>editor's choice</a>
+        </span> |  
+        <span class="tab-item">
+            <a>age</a>
+            <a>18+</a>
+        </span>  
+
+            </div>
+            <br>
+        </section>
+        <section id="how-to-play">
+            <div id="play-button">
+                <a href=" <%= game_content[1] %>" target="_main">PLAY NOW!</a>
+            </div>
+        </section>
+        <div id="screenshots">
+            <img src="C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\images\\ss1.webp" alt="Screenshot 1">
+            <img src="C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\images\\ss2.jpg" alt="Screenshot 2">
+            <img src="C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\images\\ss3.jpg" alt="Screenshot 3">
+            <img src="C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\images\\ss4.jpg" alt="Screenshot 4">
+            <!-- Add more screenshots as needed -->
+        </div>
+    </main>
+
+</div>
+
+</div>
+<%- include("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\views\\partials\\footer.ejs") %>

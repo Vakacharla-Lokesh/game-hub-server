@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import session from 'express-session';
 
 const app = express();
 const port = 3000;
@@ -13,13 +14,24 @@ app.use(express.static("public"));
 app.use(express.static("/views/images"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(authenticate);
+
+let current_session = null;
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 let sheet_data = new Map([
   ["Strategy", 0],
   ["Puzzle", 1],
   ["Action", 2],
-
+  ["Driving", 3],
+  ["Fighting", 4],
+  ["Shooting", 5],
+  ["Sports", 6],
 ]);
 
 let curr_login = "false";
@@ -75,6 +87,33 @@ function image_data(type, rows) {
     return image_url;
 }
 
+function game_about_data(type, rows) {
+  if (XLSX !== undefined) {
+      // Code to work with the workbook
+      const sheet_name = (String)(type);
+      const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+      var sheet_numb = sheet_data.get(sheet_name);
+        const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
+        var range = XLSX.utils.decode_range(sheet["!ref"]);
+
+        const game_name = new Array();
+        const firstCell = sheet[XLSX.utils.encode_cell({r: rows + 1, c: 0})];
+        const secondCell = sheet[XLSX.utils.encode_cell({r: rows + 1, c: 1})];
+        const thirdCell = sheet[XLSX.utils.encode_cell({r: rows + 1, c: 2})];
+        const fourthCell = sheet[XLSX.utils.encode_cell({r: rows + 1, c: 3})];
+        
+        game_name.push(String(firstCell.v));
+        game_name.push(String(secondCell.v));
+        game_name.push(String(thirdCell.v));
+        game_name.push(String(fourthCell.v));
+
+        return game_name;
+        }
+   else {
+    console.log('xlsx is not defined');
+  }
+}
+
 // USING MONGODB
 mongoose.connect('mongodb://localhost:27017/game-hub', { useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -117,6 +156,8 @@ const authenticate = (req, res, next) => {
   });
 };
 
+// app.use(authenticate);
+
 function loginstreak(user){
   // Update lastLoginTime
   user.lastLoginTime = Date.now();
@@ -137,7 +178,6 @@ function loginstreak(user){
     // User has not logged in consecutively
     user.loginStreak.currentStreak = 1;
   }
-
   // await user.save();
 }
 
@@ -164,6 +204,7 @@ app.get('/user', (req, res) =>{
   });
 });
 
+// CARD GAMES
 app.get('/card', (req, res)=>{
   let x = game_data("Strategy", 11);
   let y = image_data("Strategy", 11);
@@ -173,10 +214,12 @@ app.get('/card', (req, res)=>{
     genre_type: "Strategy",
     route: req.url,
     logged_in: curr_login,
+    rows : 11,
   }
   res.render("genre.ejs", game);
 });
 
+// PUZZLE GAMES
 app.get('/puzzle', (req, res)=>{
   let x = game_data("Puzzle", 8);
   let y = image_data("Puzzle", 8);
@@ -186,10 +229,87 @@ app.get('/puzzle', (req, res)=>{
     genre_type: "Puzzle",
     route: req.url,
     logged_in: curr_login,
+    rows : 8,
   }
   res.render("genre.ejs", game);
 });
 
+// DRIVING GAMES
+app.get('/driving', (req, res)=>{
+  let x = game_data("Driving", 12);
+  let y = image_data("Driving", 12);
+  const game = {
+    name: x,
+    image: y,
+    genre_type: "Driving",
+    route: req.url,
+    logged_in: curr_login,
+    rows : 12,
+  }
+  res.render("genre.ejs", game);
+});
+
+// ACTION GAMES
+app.get('/action', (req, res)=>{
+  let x = game_data("Action", 10);
+  let y = image_data("Action", 10);
+  const game = {
+    name: x,
+    image: y,
+    genre_type: "Action",
+    route: req.url,
+    logged_in: curr_login,
+    rows : 10,
+  }
+  res.render("genre.ejs", game);
+});
+
+// FIGHTING GAMES
+app.get('/fighting', (req, res)=>{
+  let x = game_data("Fighting", 12);
+  let y = image_data("Fighting", 12);
+  const game = {
+    name: x,
+    image: y,
+    genre_type: "Fighting",
+    route: req.url,
+    logged_in: curr_login,
+    rows : 12,
+  }
+  res.render("genre.ejs", game);
+});
+
+// FPS GAMES
+app.get('/fps', (req, res)=>{
+  let x = game_data("Shooting", 11);
+  let y = image_data("Shooting", 11);
+  const game = {
+    name: x,
+    image: y,
+    genre_type: "Shooting",
+    route: req.url,
+    logged_in: curr_login,
+    rows : 11,
+  }
+  res.render("genre.ejs", game);
+});
+
+// SPORTS GAMES
+app.get('/sports', (req, res)=>{
+  let x = game_data("Sports", 10);
+  let y = image_data("Sports", 10);
+  const game = {
+    name: x,
+    image: y,
+    genre_type: "Sports",
+    route: req.url,
+    logged_in: curr_login,
+    rows : 10,
+  }
+  res.render("genre.ejs", game);
+});
+
+// ABOUT PAGE
 app.get('/about', (req, res)=>{
   res.render("about_index.ejs");
 });
@@ -236,6 +356,8 @@ app.post('/login', async (req, res) => {
     const sessionToken = crypto.randomBytes(16).toString('hex');
     const session = new Session({ user_id: user._id, sessionToken });
     const result = await session.save();
+    req.session.session_token = sessionToken; // Store the session token in the user's session
+    current_session = sessionToken;
     res.cookie('session_token', sessionToken, { httpOnly: true });
     // res.render("index.ejs");
     // res.send({ message: 'Logged in successfully' });
@@ -247,15 +369,17 @@ app.post('/login', async (req, res) => {
 });
 // LOGOUT ROUTE
 app.get('/logout', (req, res) => {
-  const sessionToken = req.cookies.session_token;
-  Session.findOneAndRemove({ sessionToken }, (err, session) => {
-    if (err) {
-      return res.status(500).send({ error: 'Failed to delete session' });
+  // const sessionToken = req.session.session_token;
+  Session.findOneAndUpdate({ sessionToken: current_session }, { $set: { deleted: true } }, (err, session) => {
+    try {
+      res.clearCookie('session_token');
+      current_session.destroy(); // Destroy the user's session
+    } catch (err) {
+      // res.status(500).send({ error: 'Failed to delete session' });
+      console.log("Error in logging out");
     }
-    res.clearCookie('session_token');
-    // res.send({ message: 'Logged out successfully' }, '/');
-    res.redirect('/');
   });
+  res.redirect('/');
 });
 
 // FORGOT PASSWORD
@@ -356,6 +480,30 @@ app.get('/user-profile', (req, res) =>{
     route: req.url,
     logged_in: curr_login,
   });
+});
+
+// ABOUT PAGE OF GAMES
+app.get('/game-get/:id', async (req, res)=>{
+  try{
+    const game_info = req.params.id.split('_');
+    const game_genre = game_info[0];
+    const game_row = game_info[1];
+
+    // console.log(game_genre);
+    // console.log(game_row);
+
+    const result_data = game_about_data(game_genre, Number(game_row));
+
+    // console.log(result_data);
+
+    res.render("about_game.ejs", {
+      logged_in: curr_login,
+      game_content: result_data,
+
+    });
+  }catch(err){
+    res.status(500).send({ error: 'Game not found' });
+  }
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
