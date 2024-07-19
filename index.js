@@ -32,6 +32,7 @@ let sheet_data = new Map([
   ["Fighting", 4],
   ["Shooting", 5],
   ["Sports", 6],
+  ["All", 7],
 ]);
 
 let curr_login = "false";
@@ -112,6 +113,53 @@ function game_about_data(type, rows) {
    else {
     console.log('xlsx is not defined');
   }
+}
+
+// SEARCH FUNCTION TO FIND GAMES
+function search_game_indb(searched_game) {
+  if (XLSX !== undefined) {
+    // Code to work with the workbook
+    const sheet_name = "All";
+    const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+    var sheet_numb = sheet_data.get(sheet_name);
+      const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
+      var range = XLSX.utils.decode_range(sheet["!ref"]);
+      const game_names = new Array();
+
+      let game_req = String(searched_game).toLowerCase();
+      // console.log(game_req);
+      let found = false;
+      for (let rows = 1; rows < 68; rows++) {
+        let game_title_string = String(sheet[XLSX.utils.encode_cell({r: rows, c: 0})].v).toLowerCase();
+        // console.log(game_title_string);
+        if(game_title_string.includes(game_req)){
+          const game_name = new Array();
+          const firstCell = sheet[XLSX.utils.encode_cell({r: rows, c: 0})];
+          const secondCell = sheet[XLSX.utils.encode_cell({r: rows, c: 1})];
+          const thirdCell = sheet[XLSX.utils.encode_cell({r: rows, c: 2})];
+          const fourthCell = sheet[XLSX.utils.encode_cell({r: rows, c: 3})];
+
+          game_name.push(String(firstCell.v));
+          game_name.push(String(secondCell.v));
+          game_name.push(String(thirdCell.v));
+          game_name.push(String(fourthCell.v));
+          game_name.push(rows);
+
+          game_names.push(game_name);
+
+          found = true;
+        }
+      }
+      if(found == false){
+        return null;
+      }
+      else{
+        return game_names;
+      }
+      }
+ else {
+  console.log('xlsx is not defined');
+}
 }
 
 // USING MONGODB
@@ -205,7 +253,7 @@ app.get('/user', (req, res) =>{
 });
 
 // CARD GAMES
-app.get('/card', (req, res)=>{
+app.get('/strategy', (req, res)=>{
   let x = game_data("Strategy", 11);
   let y = image_data("Strategy", 11);
   const game = {
@@ -370,16 +418,21 @@ app.post('/login', async (req, res) => {
 // LOGOUT ROUTE
 app.get('/logout', (req, res) => {
   // const sessionToken = req.session.session_token;
-  Session.findOneAndUpdate({ sessionToken: current_session }, { $set: { deleted: true } }, (err, session) => {
-    try {
-      res.clearCookie('session_token');
-      current_session.destroy(); // Destroy the user's session
-    } catch (err) {
-      // res.status(500).send({ error: 'Failed to delete session' });
-      console.log("Error in logging out");
-    }
+  // Session.findOneAndUpdate({ sessionToken: current_session }, { $set: { deleted: true } }, (err, session) => {
+  //   try {
+  //     res.clearCookie('session_token');
+  //     current_session.destroy(); // Destroy the user's session
+  //   } catch (err) {
+  //     // res.status(500).send({ error: 'Failed to delete session' });
+  //     console.log("Error in logging out");
+  //   }
+  // });
+  res.clearCookie('session_token');
+  curr_login = "false";
+  res.render("index.ejs", {
+    route: req.url,
+    logged_in: curr_login,
   });
-  res.redirect('/');
 });
 
 // FORGOT PASSWORD
@@ -499,11 +552,38 @@ app.get('/game-get/:id', async (req, res)=>{
     res.render("about_game.ejs", {
       logged_in: curr_login,
       game_content: result_data,
-
     });
   }catch(err){
     res.status(500).send({ error: 'Game not found' });
   }
 });
 
+// SEARCH ROUTE
+app.get("/search", (req, res) =>{
+  const search_game = req.query.user_text;
+  console.log(req.query);
+  console.log.apply(req.url);
+  // console.log(`Searching for ${search_game}`);
+
+  let game_search_status = search_game_indb(search_game);
+
+  // console.log(game_search_status);
+
+  let results;
+  let game_numbs = 0;
+  if(game_search_status == null){
+    results = "No such games found";
+    game_numbs = 0;
+  }else{
+    results = `Showing ${game_search_status.length} results`;
+    game_numbs = game_search_status.length;
+  }
+  res.render("search_results.ejs", {
+    logged_in: curr_login,
+    searchResults: results,
+    found_games: game_search_status,
+    rows: game_numbs,
+    route: req.url,
+  });
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

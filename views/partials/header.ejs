@@ -39,13 +39,15 @@
             <!-- <svg xmlns="http://www.w3.org/2000/svg" class = "menu-item" width="24" height="24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" data-icon="SvgUser" aria-hidden="true"><path d="M12 3a3.5 3.5 0 11-2.475 1.025A3.493 3.493 0 0112 3zm6.2 18a9.257 9.257 0 00-1.825-5.65A5.593 5.593 0 0012 13h0a5.593 5.593 0 00-4.375 2.35A9.257 9.257 0 005.8 21h12.4z"></path></svg> -->
             <!-- <a href="#" class="menu-item">HELP</a> -->
         </div>
-        <!-- <div class="search-bar">
-            <input type="text" placeholder="Search our Games" name="textt">
-            <a href=""> <button class="btn">Search</button></a>
-        </div> -->
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 search-bar" role="search" style="padding-right: 0%;">
-            <input type="search" class="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
-        </form>
+        <div class="search-bar">
+          <form action="/search" method="get">
+            <input type="search_text" placeholder="Search our Games" name="user_text">
+            <button type="search" class="search-btn">Search</button>
+          </form>
+        </div>
+        <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 search-bar" role="search" style="padding-right: 0%; align-items: flex-end;" action="/search" method="get">
+            <input type="search" class="form-control form-control-dark text-bg-light searchgame" placeholder="Search..." aria-label="Search">
+        </form> -->
           <!-- <div class="text-end">
             <a href="/login-get"> <button type="button" class="btn btn-outline-light me-2">Login</button> </a>
             <a href="/signup-get"> <button type="button" class="btn btn-outline-light me-2" style="width: fit-content;">Sign-up</button> </a>

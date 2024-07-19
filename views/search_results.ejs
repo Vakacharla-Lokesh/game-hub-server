@@ -33,22 +33,24 @@
         </div>
         </div>
     </div>
+    <br>
+    <h2 style="color: limegreen; display: block;"> <%= searchResults %> </h2>
     <div class="others">
-        <h3 id="other">See more in <%= genre_type %></h3>
         <% let game_url = "" %>
         <div class="driving">
-            <% for(let row_num = 0; row_num<rows-1; row_num++){ %>
-            <div class="game">
-                <% game_url = "/game-get/" + genre_type + "_" + row_num %>
-                <a href = "<%= game_url %>">
-                    <div class="game-content">
-                        <h2 style="position: absolute; bottom: 5px;"><%= name[row_num] %></h2>
-                        <% let image_url = image[row_num] %>
-                        <div class="game-img" style="background-image:url(<%=image_url%>);"><img src=<%= image_url %> alt=""></div>
-                        <!-- <p>PLAY GAME</p> -->
+            <% if(rows != 0){ %>
+                <% for(let row_num = 0; row_num<rows; row_num++){ %>
+                    <div class="game">
+                        <% game_url = "/game-get/" + "All" + "_" + (found_games[row_num][4]-1) %>
+                        <a href = "<%= game_url %>">
+                            <div class="game-content">
+                                <h2 style="position: absolute; bottom: 5px;"><%= found_games[row_num][0] %></h2>
+                                <% let image_url = found_games[row_num][3] %>
+                                <div class="game-img" style="background-image:url(<%=image_url%>);"><img src=<%= image_url %> alt=""></div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
+                <% } %>
             <% } %>
         </div>
     </div>
