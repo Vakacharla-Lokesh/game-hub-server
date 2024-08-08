@@ -41,7 +41,7 @@ function game_data(type, rows) {
   if (XLSX !== undefined) {
       // Code to work with the workbook
       const sheet_name = (String)(type);
-      const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+      const table = XLSX.readFile("public/resources/Strategy.xlsx");
       var sheet_numb = sheet_data.get(sheet_name);
         const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
         var range = XLSX.utils.decode_range(sheet["!ref"]);
@@ -73,7 +73,7 @@ function game_data(type, rows) {
 
 function image_data(type, rows) {
   const sheet_name = type;
-  const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+  const table = XLSX.readFile("public/resources/Strategy.xlsx");
   var sheet_numb = sheet_data.get(sheet_name);
     const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
     var range = XLSX.utils.decode_range(sheet['!ref']);
@@ -92,7 +92,7 @@ function game_about_data(type, rows) {
   if (XLSX !== undefined) {
       // Code to work with the workbook
       const sheet_name = (String)(type);
-      const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+      const table = XLSX.readFile("public/resources/Strategy.xlsx");
       var sheet_numb = sheet_data.get(sheet_name);
         const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
         var range = XLSX.utils.decode_range(sheet["!ref"]);
@@ -120,7 +120,7 @@ function search_game_indb(searched_game) {
   if (XLSX !== undefined) {
     // Code to work with the workbook
     const sheet_name = "All";
-    const table = XLSX.readFile("C:\\Users\\Psn\\Desktop\\Web Development\\Game-hub-server\\public\\resources\\Strategy.xlsx");
+    const table = XLSX.readFile("public/resources/Strategy.xlsx");
     var sheet_numb = sheet_data.get(sheet_name);
       const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
       var range = XLSX.utils.decode_range(sheet["!ref"]);
@@ -254,15 +254,15 @@ app.get('/user', (req, res) =>{
 
 // CARD GAMES
 app.get('/strategy', (req, res)=>{
-  let x = game_data("Strategy", 11);
-  let y = image_data("Strategy", 11);
+  let x = game_data("Strategy", 14);
+  let y = image_data("Strategy", 14);
   const game = {
     name: x,
     image: y,
     genre_type: "Strategy",
     route: req.url,
     logged_in: curr_login,
-    rows : 11,
+    rows : 14,
   }
   res.render("genre.ejs", game);
 });
