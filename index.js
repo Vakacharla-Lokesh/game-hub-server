@@ -163,7 +163,7 @@ function search_game_indb(searched_game) {
 }
 
 // USING MONGODB
-mongoose.connect('mongodb://localhost:27017/game-hub', { useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/game-hub', { useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', (err) => console.error(err));
 db.once('open', () => console.log('Connected to MongoDB'));

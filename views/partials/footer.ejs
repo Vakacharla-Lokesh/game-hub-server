@@ -128,15 +128,33 @@
         const messageElement = chatElement.querySelector("p");
 
         var know = {
-            "Who are you" : "Hello, Codewith_random here ",
-            "How are you" : "Good :)",
-            "What can i do for you" : "Please Give us A Follow & Like.",
-            "Your followers" : "I have my family of 5000 members, i don't have follower ,have supportive Famiy ",
+            "who are you" : "Hello, Chatbot here ",
+            "how are you" : "Good :)",
+            "what can i do for you" : "Please Give us A Follow & Like.",
+            "your followers" : "I have my family of 5000 members, i don't have follower ,have supportive Famiy ",
             "ok" : "Thank You So Much ",
-            "Bye" : "Okay! Will meet soon..",
-            "How do I login to my account?" : "Click on the login button on the top right of the website and use your credentials to login to your account."
+            "bye" : "Okay! Will meet soon..",
+            "how do i login my account" : "Click on the login button on the top right of the website and use your credentials to login to your account.",
+            "how do i create my account" : "Click on the \"Sign Up\" button at the top right of the homepage and fill in your details.",
+            "how do i change my email " : " Go to your account settings and select \"Change Email\" to update your email address.",
+            "how can i delete my account" : " Contact our support team through the \"Help\" section, and they will assist you in deleting your account.",
+            "why is my game not loading" : "Ensure that your internet connection is stable, clear your browser cache, and try reloading the game. ",
+            "how do i fix a game crash " : "Update your graphics drivers, check for game updates, and make sure your system meets the game's requirements. ",
+            "what should i do if my game is running slow" : "Lower the game's graphical settings, close background applications, and ensure your device meets the game's requirements.",
+            "how do i report a bug in the game" : "Contact our support team through the \"Help\" section, and they will assist you.",
+            "what are some tips for beginners" : "Focus on completing the tutorial, explore the game world, and join a guild or community for support.",
+            "what are the minimum system requirements for the game" : " Check the game's page on our website for detailed system requirements.",
+            "how do i update the game" : "The game should automatically update. If not, check the app store for updates.",
+            "why is my game lagging" : "Ensure you have a stable internet connection, close unnecessary applications, and adjust the game settings.",
+            "where can i find the latest game news" : "Visit our website's \"new and trending\" section . ",
+            "how do i report another player" : "Contact our support team with details of the incident. ",
+            "can I play with my friends" : "Yes, you can add friends in-game and join multiplayer matches or co-op missions together. ",
+            "is the game free-to-play" : " Yes, the game is free-to-play with optional in-game purchases.",
+            "where can I find the game's user manual" : "The user manual is available in the \"ABOUT\" section on our website.",
+            "how can I contact customer support" : "You can contact customer support through the \"Help\" section on our website or via email at support@example.com. ",
+            "can I play the game on multiple devices" : "Yes, you can play on multiple devices as long as you log in with the same account."
         };
-
+        
         messageElement.textContent = know[userMessage];
         createChatLi(messageElement, "incoming");
         chatbox.scrollTo(0, chatbox.scrollHeight);

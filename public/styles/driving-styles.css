@@ -19,6 +19,7 @@
     width:100%;
     background-size: cover;
     background-repeat: repeat-y;
+    background-image: url('../images/gta-wall.jpg');
 }
 .welcome h1{
     font-family: Georgia, 'Times New Roman', Times, serif;
