@@ -152,10 +152,17 @@
             "is the game free-to-play" : " Yes, the game is free-to-play with optional in-game purchases.",
             "where can I find the game's user manual" : "The user manual is available in the \"ABOUT\" section on our website.",
             "how can I contact customer support" : "You can contact customer support through the \"Help\" section on our website or via email at support@example.com. ",
-            "can I play the game on multiple devices" : "Yes, you can play on multiple devices as long as you log in with the same account."
+            "can I play the game on multiple devices" : "Yes, you can play on multiple devices as long as you log in with the same account.",
+            "account" : "Click on the login button on the top right of the website and use your credentials to login to your account.",
+            "find" : "The user manual is available in the \"ABOUT\" section on our website.",
+            "change my email " : " Go to your account settings and select \"Change Email\" to update your email address.",
+            "login" : "Click on the login button on the top right of the website and use your credentials to login to your account.",
+            "lagging" : "Ensure you have a stable internet connection, close unnecessary applications, and adjust the game settings.",
+            "email " : " Go to your account settings and select \"Change Email\" to update your email address.",
+            "bug" : "Contact our support team through the \"Help\" section, and they will assist you.",
         };
         
-        messageElement.textContent = know[userMessage];
+        messageElement.textContent = know[(String)(userMessage).toLowerCase()];
         createChatLi(messageElement, "incoming");
         chatbox.scrollTo(0, chatbox.scrollHeight);
     }
@@ -221,6 +228,13 @@
     // createNotification("this is testing");
     // createNotification('This is a sample notification');
 
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>
 </body>
 </html>

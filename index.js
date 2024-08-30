@@ -35,7 +35,29 @@ let sheet_data = new Map([
   ["All", 7],
 ]);
 
+let sheet_rows = new Map([
+  ["Strategy", 14],
+  ["Puzzle", 8],
+  ["Action", 12],
+  ["Driving", 10],
+  ["Fighting", 12],
+  ["Shooting", 11],
+  ["Sports", 10],
+  ["All", 77],
+]);
+
+let genre_routes = new Map([
+  ["Strategy", '/strategy'],
+  ["Puzzle", '/puzzle'],
+  ["Action", '/action'],
+  ["Driving", '/driving'],
+  ["Fighting", '/fighting'],
+  ["Shooting", '/fps'],
+  ["Sports", '/sports'],
+]);
+
 let curr_login = "false";
+var curr_user = null;
 
 function game_data(type, rows) {
   if (XLSX !== undefined) {
@@ -43,12 +65,13 @@ function game_data(type, rows) {
       const sheet_name = (String)(type);
       const table = XLSX.readFile("public/resources/Strategy.xlsx");
       var sheet_numb = sheet_data.get(sheet_name);
-        const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
-        var range = XLSX.utils.decode_range(sheet["!ref"]);
+      const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
+      var range = XLSX.utils.decode_range(sheet["!ref"]);
 
         const game_name = new Array();
         // const image_url = new Array();
-        for (let rowNum = 1; rowNum < rows; rowNum++) {
+        console.log(rows);
+        for (let rowNum = 1; rowNum < rows-1; rowNum++) {
             // Example: Get second cell in each row, i.e. Column "B"
             const firstCell = sheet[XLSX.utils.encode_cell({r: rowNum, c: 0})];
             // const secondCell = sheet[XLSX.utils.encode_cell({r: rowNum, c: 1})];
@@ -56,10 +79,12 @@ function game_data(type, rows) {
             // const fourthCell = sheet[XLSX.utils.encode_cell({r: rowNum, c: 3})];
             // NOTE: secondCell is undefined if it does not exist (i.e. if its empty)
             // console.log(firstCell.v);
+            // console.log(rowNum);
             // console.log(secondCell.v);
             // console.log(thirdCell.v);
             // console.log(fourthCell.w); 
             // console.log(rowNum);
+
             game_name.push(String(firstCell.v));
             // image_url.push(fourthCell.v);
         }
@@ -78,7 +103,7 @@ function image_data(type, rows) {
     const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
     var range = XLSX.utils.decode_range(sheet['!ref']);
     const image_url = new Array();
-    for (let rowNum = 1; rowNum < rows; rowNum++) {
+    for (let rowNum = 1; rowNum < rows-1; rowNum++) {
         const fourthCell = sheet[XLSX.utils.encode_cell({r: rowNum, c: 3})];
         // console.log(fourthCell.v); 
         // console.log(rowNum);
@@ -129,7 +154,7 @@ function search_game_indb(searched_game) {
       let game_req = String(searched_game).toLowerCase();
       // console.log(game_req);
       let found = false;
-      for (let rows = 1; rows < 68; rows++) {
+      for (let rows = 1; rows < sheet_rows.get("All"); rows++) {
         let game_title_string = String(sheet[XLSX.utils.encode_cell({r: rows, c: 0})].v).toLowerCase();
         // console.log(game_title_string);
         if(game_title_string.includes(game_req)){
@@ -160,6 +185,19 @@ function search_game_indb(searched_game) {
  else {
   console.log('xlsx is not defined');
 }
+}
+// TO UPDATE SHEET_ROWS MAP TO NUMBER OF ROWS PRESENT
+function update_sheet_rows() {
+  for (let [key, value] of  sheet_rows.entries()) {
+    var sheet_name = (String)(key);
+    const table = XLSX.readFile("public/resources/Strategy.xlsx");
+    var sheet_numb = sheet_data.get(sheet_name);
+    const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
+    var range = XLSX.utils.decode_range(sheet["!ref"]);
+    var nrows = nrows = range.e.r - range.s.r + 1;
+    console.log(nrows);
+    sheet_rows.set(key, nrows);
+  }
 }
 
 // USING MONGODB
@@ -254,105 +292,119 @@ app.get('/user', (req, res) =>{
 
 // CARD GAMES
 app.get('/strategy', (req, res)=>{
-  let x = game_data("Strategy", 14);
-  let y = image_data("Strategy", 14);
+  update_sheet_rows();
+  let x = game_data("Strategy", sheet_rows.get("Strategy"));
+  let y = image_data("Strategy", sheet_rows.get("Strategy"));
+  let nrows = sheet_rows.get("Strategy");
   const game = {
     name: x,
     image: y,
     genre_type: "Strategy",
     route: req.url,
     logged_in: curr_login,
-    rows : 14,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // PUZZLE GAMES
 app.get('/puzzle', (req, res)=>{
-  let x = game_data("Puzzle", 8);
-  let y = image_data("Puzzle", 8);
+  update_sheet_rows();
+  let x = game_data("Puzzle", sheet_rows.get("Puzzle"));
+  let y = image_data("Puzzle", sheet_rows.get("Puzzle"));
+  let nrows = sheet_rows.get("Strategy");
   const game = {
     name: x,
     image: y,
     genre_type: "Puzzle",
     route: req.url,
     logged_in: curr_login,
-    rows : 8,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // DRIVING GAMES
 app.get('/driving', (req, res)=>{
-  let x = game_data("Driving", 12);
-  let y = image_data("Driving", 12);
+  update_sheet_rows();
+  let x = game_data("Driving", sheet_rows.get("Driving"));
+  let y = image_data("Driving", sheet_rows.get("Driving"));
+  let nrows = sheet_rows.get("Driving");
   const game = {
     name: x,
     image: y,
     genre_type: "Driving",
     route: req.url,
     logged_in: curr_login,
-    rows : 12,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // ACTION GAMES
 app.get('/action', (req, res)=>{
-  let x = game_data("Action", 10);
-  let y = image_data("Action", 10);
+  update_sheet_rows();
+  let x = game_data("Action", sheet_rows.get("Action"));
+  let y = image_data("Action", sheet_rows.get("Action"));
+  let nrows = sheet_rows.get("Action");
   const game = {
     name: x,
     image: y,
     genre_type: "Action",
     route: req.url,
     logged_in: curr_login,
-    rows : 10,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // FIGHTING GAMES
 app.get('/fighting', (req, res)=>{
-  let x = game_data("Fighting", 12);
-  let y = image_data("Fighting", 12);
+  update_sheet_rows();
+  let x = game_data("Fighting", sheet_rows.get("Fighting"));
+  let y = image_data("Fighting", sheet_rows.get("Fighting"));
+  let nrows = sheet_rows.get("Fighting");
   const game = {
     name: x,
     image: y,
     genre_type: "Fighting",
     route: req.url,
     logged_in: curr_login,
-    rows : 12,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // FPS GAMES
 app.get('/fps', (req, res)=>{
-  let x = game_data("Shooting", 11);
-  let y = image_data("Shooting", 11);
+  update_sheet_rows();
+  let x = game_data("Shooting", sheet_rows.get("Shooting"));
+  let y = image_data("Shooting", sheet_rows.get("Shooting"));
+  let nrows = sheet_rows.get("Shooting");
   const game = {
     name: x,
     image: y,
     genre_type: "Shooting",
     route: req.url,
     logged_in: curr_login,
-    rows : 11,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
 
 // SPORTS GAMES
 app.get('/sports', (req, res)=>{
-  let x = game_data("Sports", 10);
-  let y = image_data("Sports", 10);
+  update_sheet_rows();
+  let x = game_data("Sports", sheet_rows.get("Sports"));
+  let y = image_data("Sports", sheet_rows.get("Sports"));
+  let nrows = sheet_rows.get("Sports");
   const game = {
     name: x,
     image: y,
     genre_type: "Sports",
     route: req.url,
     logged_in: curr_login,
-    rows : 10,
+    rows : nrows,
   }
   res.render("genre.ejs", game);
 });
@@ -392,6 +444,8 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
+    // console.log(user);
+    curr_user = user;
     if (!user) {
       return res.status(401).send({ error: 'Invalid username or password' });
     }
@@ -528,11 +582,18 @@ app.get('/faqs', (req, res) =>{
 
 // USER PROFILE
 app.get('/user-profile', (req, res) =>{
-  curr_login = "true";
-  res.render("profile_page.ejs", {
-    route: req.url,
-    logged_in: curr_login,
-  });
+  if(curr_login == 'true'){
+    // curr_login = "true";
+    // console.log(curr_user);
+    res.render("profile_page.ejs", {
+      route: req.url,
+      logged_in: curr_login,
+      current_user : curr_user,
+    });
+  }
+  else{
+    res.render("login.ejs");
+  }
 });
 
 // ABOUT PAGE OF GAMES
@@ -585,5 +646,46 @@ app.get("/search", (req, res) =>{
     rows: game_numbs,
     route: req.url,
   });
+});
+
+// ADDING A NEW GAME
+app.post("/add_game", (req, res) => {
+  if(curr_login == "true"){
+    const new_game = req.body;
+    // console.log(new_game);
+
+    // Create a new row in the Excel sheet
+    const table = XLSX.readFile("public/resources/Strategy.xlsx");
+    // const sheet = table.Sheets[table.SheetNames[0]];
+    var sheet_numb = sheet_data.get(new_game.current_genre);
+    // console.log(sheet_numb);
+    const sheet = table.Sheets[table.SheetNames[Number(sheet_numb)]];
+    var range = XLSX.utils.decode_range(sheet["!ref"]);
+    
+    const newRow = [
+      new_game.game_name,
+      new_game.game_link,
+      new_game.game_desc,
+      new_game.game_img_url
+    ];
+    // console.log(newRow);
+    // console.log(sheet.data);
+
+    // // Add the new row to the sheet
+    // sheet.data.push(newRow);
+    sheet_rows.set(new_game.current_genre, (sheet_rows.get(new_game.current_genre)));
+    let address = "A" + (sheet_rows.get(new_game.current_genre));
+    XLSX.utils.sheet_add_aoa(sheet, [[new_game.game_name, new_game.game_link, new_game.game_desc, new_game.game_img_url]], { origin: address });
+    // // Write the updated sheet back to the Excel file
+    XLSX.writeFile(table, "public/resources/Strategy.xlsx");
+    
+    let get_req = genre_routes.get(new_game.current_genre);
+    res.redirect(get_req);
+  }
+  else{
+    res.render("login.ejs");
+  }
+
+  // res.send({ message: 'Form submitted successfully!' });
 });
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

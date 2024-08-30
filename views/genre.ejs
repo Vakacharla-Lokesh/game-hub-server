@@ -37,7 +37,7 @@
         <h3 id="other">See more in <%= genre_type %></h3>
         <% let game_url = "" %>
         <div class="driving">
-            <% for(let row_num = 0; row_num<rows-1; row_num++){ %>
+            <% for(let row_num = 0; row_num<rows-2; row_num++){ %>
             <div class="game">
                 <% game_url = "/game-get/" + genre_type + "_" + row_num %>
                 <a href = "<%= game_url %>">
@@ -50,6 +50,32 @@
                 </a>
             </div>
             <% } %>
+            <div class = "game">
+                <button class="open-button" onclick="openForm()"><img src="images/add.png" alt="ADD" style="height: 75px; width: 75px;"></button>
+                <div class="form-popup" id="myForm">
+                <form action="/add_game" class="form-container" method="post">
+                    <h1 style="display: inline;">New Game</h1>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    
+                    <label for="name"><b>Game Name</b></label>
+                    <input type="text" placeholder="Enter Game Name" name="game_name" required>
+    
+                    <label for="url"><b>Game URL</b></label>
+                    <input type="text" placeholder="Enter URL link" name="game_link" required>
+    
+                    <label for="desc"><b>Game Description</b></label>
+                    <input type="text" placeholder="Enter game description" name="game_desc" required>
+    
+                    <label for="imgurl"><b>Game Image URL</b></label>
+                    <input type="text" placeholder="Enter Image URL link" name="game_img_url" required>
+    
+                    <input type="hidden" name="current_genre" id="current_genre" value="<%= genre_type %>">
+
+                    <button type="submit" class="btn">Add</button>
+                    
+                </form>
+                </div>
+            </div>
         </div>
     </div>
     </div>
